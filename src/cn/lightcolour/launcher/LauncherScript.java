@@ -7,15 +7,15 @@ import com.alibaba.fastjson.JSONObject;
 import java.io.*;
 
 public class LauncherScript {
-    public static String java_path = System.getProperty("java.home") + "\\bin\\java.exe";
-    public static String game_path = ".minecraft\\versions\\1.8.8\\1.8.8.jar";
-    public static String natives_path = "C:\\Users\\lightcolour\\Desktop\\HMCL\\.minecraft\\versions\\1.8.8\\1.8.8-natives";
-    public static int min_memory = 128;
-    public static int max_memory = 1792;
-    public static int window_width = 854;
-    public static int window_height = 480;
-    public static String id = "Lightcolour";
-    public static void write(String path,String filename) throws IOException {
+//    public static String java_path = System.getProperty("java.home") + "\\bin\\java.exe";
+//    public static String game_path = ".minecraft\\versions\\1.8.8\\1.8.8.jar";
+//    public static String natives_path = "C:\\Users\\lightcolour\\Desktop\\HMCL\\.minecraft\\versions\\1.8.8\\1.8.8-natives";
+//    public static int min_memory = 128;
+//    public static int max_memory = 1792;
+//    public static int width_window = 854;
+//    public static int height_window = 480;
+//    public static String id = "Lightcolour";
+    public static void writeScript(String path,String filename,String java_path,String game_path,String natives_path,int min_memory,int max_memory,int width_window,int height_window,String id) throws IOException {
         StringBuilder s = new StringBuilder();
         s.append("@echo off\n");
         s.append("set APPDATA=" + path + "\n");
@@ -35,10 +35,10 @@ public class LauncherScript {
                 + getLibraries("C:\\Users\\lightcolour\\Desktop\\HMCL\\.minecraft\\versions\\1.8.8\\1.8.8.json")
                 + "C:\\Users\\lightcolour\\Desktop\\HMCL\\.minecraft\\versions\\1.8.8\\1.8.8.jar net.minecraft.client.main.Main " +
                 "--width "
-                + window_width
+                + width_window
                 + " " +
                 "--height "
-                + window_height
+                + height_window
                 + " " +
                 "--username "
                 + id
