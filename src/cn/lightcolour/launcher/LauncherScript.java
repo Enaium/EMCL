@@ -10,12 +10,40 @@ public class LauncherScript {
     public static String java_path = System.getProperty("java.home") + "\\bin\\java.exe";
     public static String game_path = ".minecraft\\versions\\1.8.8\\1.8.8.jar";
     public static String natives_path = "C:\\Users\\lightcolour\\Desktop\\HMCL\\.minecraft\\versions\\1.8.8\\1.8.8-natives";
+    public static int min_memory = 128;
+    public static int max_memory = 1792;
+    public static int window_width = 854;
+    public static int window_height = 480;
+    public static String id = "Lightcolour";
     public static void write(String path,String filename) throws IOException {
         StringBuilder s = new StringBuilder();
         s.append("@echo off\n");
         s.append("set APPDATA=" + path + "\n");
-        s.append("\"" + java_path + "\" -Dminecraft.client.jar=" + game_path + " -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=16M -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Xmn128m -Xmx1792m -Dfml.ignoreInvalidMinecraftCertificates=true -Dfml.ignorePatchDiscrepancies=true -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump -Djava.library.path=" + natives_path + " -Dminecraft.launcher.brand=EMCL -Dminecraft.launcher.version=1 -cp " + getLibraries("C:\\Users\\lightcolour\\Desktop\\HMCL\\.minecraft\\versions\\1.8.8\\1.8.8.json") + "C:\\Users\\lightcolour\\Desktop\\HMCL\\.minecraft\\versions\\1.8.8\\1.8.8.jar net.minecraft.client.main.Main --width 854 --height 480 --username Lightcolour --version \"HMCL 3.2.130\" --gameDir C:\\Users\\lightcolour\\Desktop\\HMCL\\.minecraft --assetsDir C:\\Users\\lightcolour\\Desktop\\HMCL\\.minecraft\\assets --assetIndex 1.8 --uuid 6b2a638616303c5fab54e1416327bd17 --accessToken c1f69ef2e8b04b49abd165dee3276704 --userProperties {} --userType mojang");
-        WriteBat(path,"1.bat",s.toString());
+        s.append("\""
+                + java_path
+                + "\" -Dminecraft.client.jar="
+                + game_path
+                + " -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=16M -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow " +
+                "-Xmn"
+                + min_memory
+                + "m -Xmx"
+                + max_memory
+                + "m -Dfml.ignoreInvalidMinecraftCertificates=true -Dfml.ignorePatchDiscrepancies=true -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump -Djava.library.path="
+                + natives_path
+                + " -Dminecraft.launcher.brand=EMCL -Dminecraft.launcher.version=1.0 " +
+                "-cp "
+                + getLibraries("C:\\Users\\lightcolour\\Desktop\\HMCL\\.minecraft\\versions\\1.8.8\\1.8.8.json")
+                + "C:\\Users\\lightcolour\\Desktop\\HMCL\\.minecraft\\versions\\1.8.8\\1.8.8.jar net.minecraft.client.main.Main " +
+                "--width "
+                + window_width
+                + " " +
+                "--height "
+                + window_height
+                + " " +
+                "--username "
+                + id
+                + " --version \"EMCL 1.0\" --gameDir C:\\Users\\lightcolour\\Desktop\\HMCL\\.minecraft --assetsDir C:\\Users\\lightcolour\\Desktop\\HMCL\\.minecraft\\assets --assetIndex 1.8 --uuid 6b2a638616303c5fab54e1416327bd17 --accessToken c1f69ef2e8b04b49abd165dee3276704 --userProperties {} --userType mojang");
+        WriteBat(path,filename,s.toString());
     }
 
     public static void runScript(String path,String filename) {
