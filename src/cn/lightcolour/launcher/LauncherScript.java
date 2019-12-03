@@ -9,7 +9,7 @@ import java.io.*;
 public class LauncherScript {
 //    public static String java_path = System.getProperty("java.home") + "\\bin\\java.exe";
 //    public static String game_path = ".minecraft\\versions\\1.8.8\\1.8.8.jar";
-//    public static String natives_path = "C:\\Users\\lightcolour\\Desktop\\HMCL\\.minecraft\\versions\\1.8.8\\1.8.8-natives";
+//    public static String natives_path = "C:\Users\lightcolour\AppData\Roaming\\.minecraft\\versions\\1.8.8\\1.8.8-natives";
 //    public static int min_memory = 128;
 //    public static int max_memory = 1792;
 //    public static int width_window = 854;
@@ -32,8 +32,9 @@ public class LauncherScript {
                 + natives_path
                 + " -Dminecraft.launcher.brand=EMCL -Dminecraft.launcher.version=1.0 " +
                 "-cp "
-                + getLibraries("C:\\Users\\lightcolour\\Desktop\\HMCL\\.minecraft\\versions\\1.8.8\\1.8.8.json")
-                + "C:\\Users\\lightcolour\\Desktop\\HMCL\\.minecraft\\versions\\1.8.8\\1.8.8.jar net.minecraft.client.main.Main " +
+                + getLibraries("C:\\Users\\lightcolour\\AppData\\Roaming\\.minecraft\\versions\\1.8.8\\1.8.8.json")
+                + game_path
+                + " net.minecraft.client.main.Main " +
                 "--width "
                 + width_window
                 + " " +

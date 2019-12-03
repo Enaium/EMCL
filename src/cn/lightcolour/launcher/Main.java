@@ -80,13 +80,13 @@ public class Main extends JFrame {
         JLabel javapathJLabel = new JLabel("JPath:");
         javapathJLabel.setBounds(10,120,50,50);
         contentPane.add(javapathJLabel);
-        JTextField gamepathJTextField = new JTextField("C:\\Users\\lightcolour\\Desktop\\HMCL" + "\\.minecraft\\versions\\1.8.8\\1.8.8.jar");//game path
+        JTextField gamepathJTextField = new JTextField("C:\\Users\\lightcolour\\AppData\\Roaming" + "\\.minecraft\\versions\\1.8.8\\1.8.8.jar");//game path
         gamepathJTextField.setBounds(60,160,240,20);
         contentPane.add(gamepathJTextField);
         JLabel gamepathJLabel = new JLabel("Gpath:");
         gamepathJLabel.setBounds(10,150,50,50);
         contentPane.add(gamepathJLabel);
-        JTextField nativespathJTextField = new JTextField("C:\\Users\\lightcolour\\Desktop\\HMCL" + "\\.minecraft\\versions\\1.8.8\\1.8.8-natives");//natives path
+        JTextField nativespathJTextField = new JTextField("C:\\Users\\lightcolour\\AppData\\Roaming" + "\\.minecraft\\versions\\1.8.8\\1.8.8-natives");//natives path
         nativespathJTextField.setBounds(60,190,240,20);
         contentPane.add(nativespathJTextField);
         JLabel nativespathJLabel = new JLabel("Npath:");
