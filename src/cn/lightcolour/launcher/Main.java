@@ -30,7 +30,7 @@ public class Main extends JFrame {
 
     public Main() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Launcher By Lightcolour");
+        setTitle("Excel Minecraft Client Launcher By Lightcolour");
         setBounds(100, 100, 400, 500);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
