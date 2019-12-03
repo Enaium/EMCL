@@ -106,6 +106,5 @@ public class Main extends JFrame {
         });
         button_launcher.setBounds(100, 250, 100, 30);
         contentPane.add(button_launcher);
-
     }
 }

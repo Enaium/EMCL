@@ -4,7 +4,6 @@ import java.io.IOException;
 
 
 public class Auth {
-
     public static String Check() throws IOException {
         String url = "https://status.mojang.com/check";
         String s = Utils.requset(url);
