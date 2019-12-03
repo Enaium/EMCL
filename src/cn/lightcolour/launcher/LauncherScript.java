@@ -43,7 +43,7 @@ public class LauncherScript {
                 + " " +
                 "--username "
                 + id
-                + " --version \"EMCL 1.0\" --gameDir C:\\Users\\lightcolour\\Desktop\\HMCL\\.minecraft --assetsDir C:\\Users\\lightcolour\\Desktop\\HMCL\\.minecraft\\assets --assetIndex 1.8 --uuid 6b2a638616303c5fab54e1416327bd17 --accessToken c1f69ef2e8b04b49abd165dee3276704 --userProperties {} --userType mojang");
+                + " --version \"EMCL 1.0\" --gameDir C:\\Users\\lightcolour\\AppData\\Roaming\\.minecraft --assetsDir C:\\Users\\lightcolour\\AppData\\Roaming\\.minecraft\\assets --assetIndex 1.8 --uuid 6b2a638616303c5fab54e1416327bd17 --accessToken c1f69ef2e8b04b49abd165dee3276704 --userProperties {} --userType mojang");
         WriteBat(path,filename,s.toString());
     }
 
@@ -79,7 +79,7 @@ public class LauncherScript {
             for (int j = 0; j < lib_path_arr.length; j++) {
                 temp += lib_path_arr[j] + "\\";
             }
-            lib_path = "C:\\Users\\lightcolour\\Desktop\\HMCL\\.minecraft\\libraries\\" + temp + libraries_arr[1] + "\\" + libraries_arr[2] + "\\" + libraries_arr[1] + "-" + libraries_arr[2] + ".jar";
+            lib_path = "C:\\Users\\lightcolour\\AppData\\Roaming\\.minecraft\\libraries\\" + temp + libraries_arr[1] + "\\" + libraries_arr[2] + "\\" + libraries_arr[1] + "-" + libraries_arr[2] + ".jar";
             re +=lib_path + ";";
         }
         return re;
