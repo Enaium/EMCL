@@ -13,6 +13,7 @@ import java.io.*;
 
 public class Main extends JFrame {
     private JPanel contentPane;
+    private String APPDATA = System.getenv("APPDATA");
     public static void main(final String[] args) throws IOException {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -47,7 +48,7 @@ public class Main extends JFrame {
         contentPane.add(idJLabel);
         JComboBox versionJComboBox = new JComboBox();
         versionJComboBox.setBounds(200,30,100,20);
-        File dir = new File("C:\\Users\\lightcolour\\AppData\\Roaming" + "\\.minecraft\\versions");
+        File dir = new File(APPDATA + "\\.minecraft\\versions");
         File[] files = dir.listFiles();
         FileFilter fileFilter = new FileFilter() {
             public boolean accept(File file) {
@@ -89,11 +90,11 @@ public class Main extends JFrame {
         JLabel heightwindowJLabel = new JLabel("Height Window:");
         heightwindowJLabel.setBounds(160,90,100,20);
         contentPane.add(heightwindowJLabel);
-        JTextField jsonpathJTextField = new JTextField("C:\\Users\\lightcolour\\AppData\\Roaming" + "\\.minecraft\\versions\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + ".json");
+        JTextField jsonpathJTextField = new JTextField(APPDATA + "\\.minecraft\\versions\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + ".json");
         jsonpathJTextField.setBounds(60,130,240,20);
         contentPane.add(jsonpathJTextField);
         JLabel jsonJLabel = new JLabel("Json:");
-        jsonJLabel.setBounds(10,120,240,20);
+        jsonJLabel.setBounds(10,130,240,20);
         contentPane.add(jsonJLabel);
         JTextField javapathJTextField = new JTextField(System.getProperty("java.home") + "\\bin\\java.exe");//java path
         javapathJTextField.setBounds(60,160,240,20);
@@ -101,13 +102,13 @@ public class Main extends JFrame {
         JLabel javapathJLabel = new JLabel("Java:");
         javapathJLabel.setBounds(10,150,50,50);
         contentPane.add(javapathJLabel);
-        JTextField gamepathJTextField = new JTextField("C:\\Users\\lightcolour\\AppData\\Roaming" + "\\.minecraft\\versions\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + ".jar");//game path
+        JTextField gamepathJTextField = new JTextField(APPDATA + "\\.minecraft\\versions\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + ".jar");//game path
         gamepathJTextField.setBounds(60,190,240,20);
         contentPane.add(gamepathJTextField);
         JLabel gamepathJLabel = new JLabel("Game:");
         gamepathJLabel.setBounds(10,180,50,50);
         contentPane.add(gamepathJLabel);
-        JTextField nativespathJTextField = new JTextField("C:\\Users\\lightcolour\\AppData\\Roaming" + "\\.minecraft\\versions\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "-natives");//natives path
+        JTextField nativespathJTextField = new JTextField(APPDATA + "\\.minecraft\\versions\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "-natives");//natives path
         nativespathJTextField.setBounds(60,220,240,20);
         contentPane.add(nativespathJTextField);
         JLabel nativespathJLabel = new JLabel("Natives:");
@@ -116,9 +117,9 @@ public class Main extends JFrame {
         versionJComboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                jsonpathJTextField.setText("C:\\Users\\lightcolour\\AppData\\Roaming" + "\\.minecraft\\versions\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + ".json");
-                gamepathJTextField.setText("C:\\Users\\lightcolour\\AppData\\Roaming" + "\\.minecraft\\versions\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + ".jar");//game path
-                nativespathJTextField.setText("C:\\Users\\lightcolour\\AppData\\Roaming" + "\\.minecraft\\versions\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "-natives");//natives path
+                jsonpathJTextField.setText(APPDATA + "\\.minecraft\\versions\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + ".json");
+                gamepathJTextField.setText(APPDATA + "\\.minecraft\\versions\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + ".jar");//game path
+                nativespathJTextField.setText(APPDATA + "\\.minecraft\\versions\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "-natives");//natives path
 
             }
         });

@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import java.io.*;
 
 public class LauncherScript {
+    private static String APPDATA = System.getenv("APPDATA");
     public static void writeScript(String path,String filename,String java_path,String game_path,String natives_path,String json_path,int min_memory,int max_memory,int width_window,int height_window,String id) throws IOException {
         StringBuilder s = new StringBuilder();
         s.append("@echo off\n");
@@ -15,30 +16,38 @@ public class LauncherScript {
                 + java_path
                 + "\" -Dminecraft.client.jar="
                 + game_path
-                + " -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=16M -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow " +
-                "-Xmn"
+                + " -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=16M -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow "
+                + "-Xmn"
                 + min_memory
                 + "m -Xmx"
                 + max_memory
                 + "m -Dfml.ignoreInvalidMinecraftCertificates=true -Dfml.ignorePatchDiscrepancies=true -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump -Djava.library.path="
                 + natives_path
-                + " -Dminecraft.launcher.brand=EMCL -Dminecraft.launcher.version=1.0 " +
-                "-cp "
+                + " -Dminecraft.launcher.brand=EMCL -Dminecraft.launcher.version=1.0 "
+                + "-cp "
                 + getLibraries(json_path)
                 + game_path
-                + " net.minecraft.client.main.Main " +
-                "--width "
+                + " "
+                + getmainClass(json_path)
+                + " "
+                + "--width "
                 + width_window
                 + " " +
                 "--height "
                 + height_window
-                + " " +
-                "--username "
+                + " "
+                + "--username "
                 + id
-                + " --version \"EMCL 1.0\" --gameDir C:\\Users\\lightcolour\\AppData\\Roaming\\.minecraft --assetsDir C:\\Users\\lightcolour\\AppData\\Roaming\\.minecraft\\assets " +
-                "--assetIndex "
-                + getassetIndex(json_path) +
-                " --uuid 6b2a638616303c5fab54e1416327bd17 --accessToken c1f69ef2e8b04b49abd165dee3276704 --userProperties {} --userType mojang");
+                + " --version \"EMCL 1.0\" "
+                + "--gameDir "
+                + APPDATA + "\\.minecraft"
+                + " "
+                + "--assetsDir "
+                + APPDATA + "\\.minecraft\\assets"
+                + " "
+                + "--assetIndex "
+                + getassetIndex(json_path)
+                + " --uuid 6b2a638616303c5fab54e1416327bd17 --accessToken c1f69ef2e8b04b49abd165dee3276704 --userProperties {} --userType mojang");
         WriteBat(path,filename,s.toString());
     }
 
@@ -60,6 +69,10 @@ public class LauncherScript {
         }
     }
 
+    public static void CheckFile() {
+
+    }
+
     private static String getLibraries(String jsonpath) {
         String json = Utils.txtString(new File(jsonpath));
         JSONObject jsonObject = JSON.parseObject(json);
@@ -74,7 +87,7 @@ public class LauncherScript {
             for (int j = 0; j < lib_path_arr.length; j++) {
                 temp += lib_path_arr[j] + "\\";
             }
-            lib_path = "C:\\Users\\lightcolour\\AppData\\Roaming\\.minecraft\\libraries\\" + temp + libraries_arr[1] + "\\" + libraries_arr[2] + "\\" + libraries_arr[1] + "-" + libraries_arr[2] + ".jar";
+            lib_path = APPDATA + "\\.minecraft\\libraries\\" + temp + libraries_arr[1] + "\\" + libraries_arr[2] + "\\" + libraries_arr[1] + "-" + libraries_arr[2] + ".jar";
             re +=lib_path + ";";
         }
         return re;
@@ -98,6 +111,12 @@ public class LauncherScript {
         JSONObject jsonObject = JSON.parseObject(json);
         JSONObject assetIndexObject = JSONObject.parseObject(jsonObject.getString("assetIndex"));
         return assetIndexObject.get("id").toString();
+    }
+
+    private static String getmainClass(String json_path) {
+        File file = new File(json_path);
+        JSONObject jsonObject = JSON.parseObject(Utils.txtString(file));
+        return jsonObject.get("mainClass").toString();
     }
 
 }
