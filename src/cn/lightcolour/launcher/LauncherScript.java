@@ -7,15 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import java.io.*;
 
 public class LauncherScript {
-//    public static String java_path = System.getProperty("java.home") + "\\bin\\java.exe";
-//    public static String game_path = ".minecraft\\versions\\1.8.8\\1.8.8.jar";
-//    public static String natives_path = "C:\Users\lightcolour\AppData\Roaming\\.minecraft\\versions\\1.8.8\\1.8.8-natives";
-//    public static int min_memory = 128;
-//    public static int max_memory = 1792;
-//    public static int width_window = 854;
-//    public static int height_window = 480;
-//    public static String id = "Lightcolour";
-    public static void writeScript(String path,String filename,String java_path,String game_path,String natives_path,int min_memory,int max_memory,int width_window,int height_window,String id) throws IOException {
+    public static void writeScript(String path,String filename,String java_path,String game_path,String natives_path,String json_path,int min_memory,int max_memory,int width_window,int height_window,String id) throws IOException {
         StringBuilder s = new StringBuilder();
         s.append("@echo off\n");
         s.append("set APPDATA=" + path + "\n");
@@ -32,7 +24,7 @@ public class LauncherScript {
                 + natives_path
                 + " -Dminecraft.launcher.brand=EMCL -Dminecraft.launcher.version=1.0 " +
                 "-cp "
-                + getLibraries("C:\\Users\\lightcolour\\AppData\\Roaming\\.minecraft\\versions\\1.8.8\\1.8.8.json")
+                + getLibraries(json_path)
                 + game_path
                 + " net.minecraft.client.main.Main " +
                 "--width "
@@ -43,7 +35,10 @@ public class LauncherScript {
                 + " " +
                 "--username "
                 + id
-                + " --version \"EMCL 1.0\" --gameDir C:\\Users\\lightcolour\\AppData\\Roaming\\.minecraft --assetsDir C:\\Users\\lightcolour\\AppData\\Roaming\\.minecraft\\assets --assetIndex 1.8 --uuid 6b2a638616303c5fab54e1416327bd17 --accessToken c1f69ef2e8b04b49abd165dee3276704 --userProperties {} --userType mojang");
+                + " --version \"EMCL 1.0\" --gameDir C:\\Users\\lightcolour\\AppData\\Roaming\\.minecraft --assetsDir C:\\Users\\lightcolour\\AppData\\Roaming\\.minecraft\\assets " +
+                "--assetIndex "
+                + getassetIndex(json_path) +
+                " --uuid 6b2a638616303c5fab54e1416327bd17 --accessToken c1f69ef2e8b04b49abd165dee3276704 --userProperties {} --userType mojang");
         WriteBat(path,filename,s.toString());
     }
 
@@ -95,6 +90,14 @@ public class LauncherScript {
         fileOutputStream.write(text.getBytes());
         fileOutputStream.flush();
         fileOutputStream.close();
+    }
+
+    private static String getassetIndex(String json_path) {
+        File file = new File(json_path);
+        String json = Utils.txtString(file);
+        JSONObject jsonObject = JSON.parseObject(json);
+        JSONObject assetIndexObject = JSONObject.parseObject(jsonObject.getString("assetIndex"));
+        return assetIndexObject.get("id").toString();
     }
 
 }

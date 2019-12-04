@@ -7,6 +7,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.*;
 
 public class Main extends JFrame {
@@ -45,7 +47,20 @@ public class Main extends JFrame {
         contentPane.add(idJLabel);
         JComboBox versionJComboBox = new JComboBox();
         versionJComboBox.setBounds(200,30,100,20);
-        versionJComboBox.addItem("1.8.8");
+        File dir = new File("C:\\Users\\lightcolour\\AppData\\Roaming" + "\\.minecraft\\versions");
+        File[] files = dir.listFiles();
+        FileFilter fileFilter = new FileFilter() {
+            public boolean accept(File file) {
+                return file.isDirectory();
+            }
+        };
+        files = dir.listFiles(fileFilter);
+        if (!(files.length == 0)) {
+            for (int i=0; i< files.length; i++) {
+                File filename = files[i];
+                versionJComboBox.addItem(filename.getName());
+            }
+        }
         contentPane.add(versionJComboBox);
         JLabel versionJLabel = new JLabel("Version:");
         versionJLabel.setBounds(150,30,100,20);
@@ -74,30 +89,54 @@ public class Main extends JFrame {
         JLabel heightwindowJLabel = new JLabel("Height Window:");
         heightwindowJLabel.setBounds(160,90,100,20);
         contentPane.add(heightwindowJLabel);
+        JTextField jsonpathJTextField = new JTextField("C:\\Users\\lightcolour\\AppData\\Roaming" + "\\.minecraft\\versions\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + ".json");
+        jsonpathJTextField.setBounds(60,130,240,20);
+        contentPane.add(jsonpathJTextField);
+        JLabel jsonJLabel = new JLabel("Json:");
+        jsonJLabel.setBounds(10,120,240,20);
+        contentPane.add(jsonJLabel);
         JTextField javapathJTextField = new JTextField(System.getProperty("java.home") + "\\bin\\java.exe");//java path
-        javapathJTextField.setBounds(60,130,240,20);
+        javapathJTextField.setBounds(60,160,240,20);
         contentPane.add(javapathJTextField);
-        JLabel javapathJLabel = new JLabel("JPath:");
-        javapathJLabel.setBounds(10,120,50,50);
+        JLabel javapathJLabel = new JLabel("Java:");
+        javapathJLabel.setBounds(10,150,50,50);
         contentPane.add(javapathJLabel);
-        JTextField gamepathJTextField = new JTextField("C:\\Users\\lightcolour\\AppData\\Roaming" + "\\.minecraft\\versions\\1.8.8\\1.8.8.jar");//game path
-        gamepathJTextField.setBounds(60,160,240,20);
+        JTextField gamepathJTextField = new JTextField("C:\\Users\\lightcolour\\AppData\\Roaming" + "\\.minecraft\\versions\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + ".jar");//game path
+        gamepathJTextField.setBounds(60,190,240,20);
         contentPane.add(gamepathJTextField);
-        JLabel gamepathJLabel = new JLabel("Gpath:");
-        gamepathJLabel.setBounds(10,150,50,50);
+        JLabel gamepathJLabel = new JLabel("Game:");
+        gamepathJLabel.setBounds(10,180,50,50);
         contentPane.add(gamepathJLabel);
-        JTextField nativespathJTextField = new JTextField("C:\\Users\\lightcolour\\AppData\\Roaming" + "\\.minecraft\\versions\\1.8.8\\1.8.8-natives");//natives path
-        nativespathJTextField.setBounds(60,190,240,20);
+        JTextField nativespathJTextField = new JTextField("C:\\Users\\lightcolour\\AppData\\Roaming" + "\\.minecraft\\versions\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "-natives");//natives path
+        nativespathJTextField.setBounds(60,220,240,20);
         contentPane.add(nativespathJTextField);
-        JLabel nativespathJLabel = new JLabel("Npath:");
-        nativespathJLabel.setBounds(10,180,50,50);
+        JLabel nativespathJLabel = new JLabel("Natives:");
+        nativespathJLabel.setBounds(10,210,50,50);
         contentPane.add(nativespathJLabel);
+        versionJComboBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                jsonpathJTextField.setText("C:\\Users\\lightcolour\\AppData\\Roaming" + "\\.minecraft\\versions\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + ".json");
+                gamepathJTextField.setText("C:\\Users\\lightcolour\\AppData\\Roaming" + "\\.minecraft\\versions\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + ".jar");//game path
+                nativespathJTextField.setText("C:\\Users\\lightcolour\\AppData\\Roaming" + "\\.minecraft\\versions\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "\\" + versionJComboBox.getItemAt(versionJComboBox.getSelectedIndex()) + "-natives");//natives path
+
+            }
+        });
         JButton button_launcher = new JButton("Launcher");
         button_launcher.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
                 try {
-                    LauncherScript.writeScript("C:\\Users\\lightcolour\\Desktop","1.bat",javapathJTextField.getText(),gamepathJTextField.getText(),nativespathJTextField.getText(),Integer.valueOf(minmemoryJTextField.getText()),Integer.valueOf(maxmemoryJTextField.getText()),Integer.valueOf(widthwindowJTextField.getText()),Integer.valueOf(heightwindowJTextField.getText()),"Lightcolour");
+                    LauncherScript.writeScript("C:\\Users\\lightcolour\\Desktop",
+                            "1.bat",javapathJTextField.getText(),
+                            gamepathJTextField.getText(),
+                            nativespathJTextField.getText(),
+                            jsonpathJTextField.getText(),
+                            Integer.valueOf(minmemoryJTextField.getText()),
+                            Integer.valueOf(maxmemoryJTextField.getText()),
+                            Integer.valueOf(widthwindowJTextField.getText()),
+                            Integer.valueOf(heightwindowJTextField.getText()),
+                            "Lightcolour");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -107,4 +146,6 @@ public class Main extends JFrame {
         button_launcher.setBounds(100, 250, 100, 30);
         contentPane.add(button_launcher);
     }
+
+
 }
