@@ -8,6 +8,7 @@ import java.io.*;
 
 public class LauncherScript {
     private static String APPDATA = System.getenv("APPDATA");
+
     public static void writeScript(String path,String filename,String java_path,String game_path,String natives_path,String json_path,int min_memory,int max_memory,int width_window,int height_window,String id) throws IOException {
         StringBuilder s = new StringBuilder();
         s.append("@echo off\n");
@@ -48,7 +49,13 @@ public class LauncherScript {
                 + " "
                 + "--assetIndex "
                 + getassetIndex(json_path)
-                + " --uuid 6b2a638616303c5fab54e1416327bd17 --accessToken c1f69ef2e8b04b49abd165dee3276704 --userProperties {} --userType mojang");
+                + " --uuid "
+                + Auth.getUUID(id)
+                + " "
+                + "--accessToken"
+                + " "
+                + "null"
+                + " --userProperties {} --userType mojang");
         WriteBat(path,filename,s.toString());
     }
 

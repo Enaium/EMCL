@@ -31,7 +31,7 @@ public class Main extends JFrame {
     }
 
 
-    public Main() {
+    public Main() throws IOException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Excel Minecraft Client Launcher By Lightcolour");
         setBounds(100, 100, 400, 500);

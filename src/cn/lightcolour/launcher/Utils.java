@@ -5,7 +5,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class Utils {
-    public static String requset(String url) throws IOException {
+    public static String request(String url) throws IOException {
         String result = "";
         BufferedReader in = null;
         String urlNameString = url;
