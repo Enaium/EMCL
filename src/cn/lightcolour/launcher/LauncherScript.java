@@ -55,7 +55,6 @@ public class LauncherScript {
     public static void runScript(String path,String filename) {
         Process p;
         String cmd = path + "\\" + filename;
-
         try {
             p = Runtime.getRuntime().exec(cmd);
             InputStream fis=p.getInputStream();
