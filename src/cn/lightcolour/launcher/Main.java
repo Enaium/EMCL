@@ -128,7 +128,7 @@ public class Main extends JFrame {
             @Override
             public void actionPerformed(ActionEvent event) {
                 try {
-                    LauncherScript.writeScript("C:\\Users\\lightcolour\\Desktop",
+                    LauncherScript.writeScript(APPDATA + "\\.minecraft\\EMCL.bat",
                             "1.bat",javapathJTextField.getText(),
                             gamepathJTextField.getText(),
                             nativespathJTextField.getText(),
@@ -137,11 +137,11 @@ public class Main extends JFrame {
                             Integer.valueOf(maxmemoryJTextField.getText()),
                             Integer.valueOf(widthwindowJTextField.getText()),
                             Integer.valueOf(heightwindowJTextField.getText()),
-                            "Lightcolour");
+                            idJTextField.getText());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                LauncherScript.runScript("C:\\Users\\lightcolour\\Desktop","1.bat");
+                LauncherScript.runScript(APPDATA + "\\.minecraft","EMCL.bat");
             }
         });
         button_launcher.setBounds(100, 250, 100, 30);
