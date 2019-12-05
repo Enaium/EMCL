@@ -21,7 +21,8 @@ public class LauncherScript {
                 + min_memory
                 + "m -Xmx"
                 + max_memory
-                + "m -Dfml.ignoreInvalidMinecraftCertificates=true -Dfml.ignorePatchDiscrepancies=true -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump -Djava.library.path="
+                + "m -Dfml.ignoreInvalidMinecraftCertificates=true -Dfml.ignorePatchDiscrepancies=true -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump "
+                + "-Djava.library.path="
                 + natives_path
                 + " -Dminecraft.launcher.brand=EMCL -Dminecraft.launcher.version=1.0 "
                 + "-cp "
