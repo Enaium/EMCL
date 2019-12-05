@@ -128,8 +128,8 @@ public class Main extends JFrame {
             @Override
             public void actionPerformed(ActionEvent event) {
                 try {
-                    LauncherScript.writeScript(APPDATA + "\\.minecraft\\EMCL.bat",
-                            "1.bat",javapathJTextField.getText(),
+                    LauncherScript.writeScript(APPDATA + "\\.minecraft",
+                            "EMCL.bat",javapathJTextField.getText(),
                             gamepathJTextField.getText(),
                             nativespathJTextField.getText(),
                             jsonpathJTextField.getText(),
